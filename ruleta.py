@@ -18,8 +18,8 @@ corridas = args.t
 numero_elegido = args.e
 '''
 
-cant_tiradas = 100
-corridas = 5
+cant_tiradas = 1000
+corridas = 1
 numero_elegido = 0
 
 # ----------- Inicio de la simulación -----------
@@ -33,6 +33,9 @@ vp = [] # Valor promedio de las tiradas por corrida
 
 desv = [] # Desvio de las tiradas por corrida
 vari = [] # Varianza de las tiradas por corrida
+
+cantidadExitos = []
+
 valores_total = []
 
 # La ruleta tiene 37 numeros (0 al 36)
@@ -61,7 +64,7 @@ for i in range(corridas):
         #frecuencia absoluta del numero j en la corrida i
         fac.append(contadorResultados)  
         #frecuencia relativa del numero j en la corrida i
-        frc.append((contadorResultados / cant_tiradas))
+        frc.append(float(contadorResultados / cant_tiradas))
     fa.append(fac)
     fr.append(frc)
 
@@ -71,27 +74,28 @@ for i in range(corridas):
     for v in range(len(valores)):
         contadorPromedio = contadorPromedio + valores[v]
 
-    vp.append(float(contadorPromedio/cant_tiradas))
+    promedioCorrida = float(contadorPromedio/cant_tiradas) 
+    vp.append(promedioCorrida)
 
     # 4. Desvio de las tiradas por corrida
-    
-'''
+
+    sumaVarianza = 0
     for v in range(len(valores)):
         # La diferencia entre el valor y el promedio, al cuadrado
-        sumaVarianza += 
-''' 
-
+        sumaVarianza += (valores[v] - promedioCorrida) ** 2 
+    varianzaCorrida = float(sumaVarianza / cant_tiradas)
+    vari.append(varianzaCorrida)
     
-    
+    # Desvío estándar: raíz cuadrada de la varianza
+    desvio_corrida = float(varianzaCorrida ** 0.5)
+    desv.append(desvio_corrida)
 
 
 
+    print(f"Varianza: {varianzaCorrida} - Desvío: {desvio_corrida}")
 
 
-
-
-
-    
+     
         
 print('Frecuencia Absoluta')
 print(fa)
@@ -101,15 +105,17 @@ print('Valor Promedio')
 print(vp)
 
 
+# Dibuja el gráfico de frecuencia relativa
+plt.plot(fr)
+plt.title("Número de Tiradas sobre Frecuencia Relativa") # Establece el título del gráfico
+plt.xlabel("Número de tiradas") # Establece el título del eje x
+plt.ylabel("Frecuencia Relativa") # Establece el título del eje y
+plt.show() # Muestra el gráfico
 
-'''
-Traceback (most recent call last):
-  File "/home/repl324/main.py", line 49, in <module>
-    for v in range(valores):
-             ^^^^^^^^^^^^^^
-TypeError: only integer scalar arrays can be converted to a scalar index
 
-'''
+
+
+
 '''
 
     exitos = np.count_nonzero(valores == numero_elegido)
@@ -145,12 +151,6 @@ plt.xlabel("Valores de la Ruleta")
 plt.ylabel("Cantidad de veces que salió")
 plt.show()
 
-# Dibuja el gráfico de frecuencia relativa
-plt.plot(fr)
-plt.title("Número de Tiradas sobre Frecuencia Relativa") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x
-plt.ylabel("Frecuencia Relativa") # Establece el título del eje y
-plt.show() # Muestra el gráfico
 
 # Dibuja el gráfico de promedio de tiradas
 plt.plot(vp)
