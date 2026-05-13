@@ -77,6 +77,17 @@ for corrida in range(corridas):
     vd_c = np.sqrt(vv_c)
     vd_a.append(vd_c.astype(float).tolist())
 
+
+
+
+
+
+
+
+
+
+
+
 #-----------------------------------------------------
 #---------------- GRAFICOS 1 CORRIDA ----------------
 
@@ -144,6 +155,16 @@ plt.show()
 # --------- Graficos de comparación por corrida ---------
 # estos son para ver que los valores de cada corrida efectivamente son cercanos a los valores esperados
 
+def graficar_regla_empirica(datos):
+    mean = np.mean(datos)
+    std = np.std(datos)
+    plt.axhline(y=mean + std, color='g', linestyle=':', alpha=0.7, label=r'$\mu \pm 1\sigma$ (68%)')
+    plt.axhline(y=mean - std, color='g', linestyle=':', alpha=0.7)
+    plt.axhline(y=mean + 2*std, color='orange', linestyle=':', alpha=0.7, label=r'$\mu \pm 2\sigma$ (95%)')
+    plt.axhline(y=mean - 2*std, color='orange', linestyle=':', alpha=0.7)
+    plt.axhline(y=mean + 3*std, color='purple', linestyle=':', alpha=0.7, label=r'$\mu \pm 3\sigma$ (99.7%)')
+    plt.axhline(y=mean - 3*std, color='purple', linestyle=':', alpha=0.7)
+
 # Grafico 1: Gráfico de bastones - Frecuencia Absoluta
 conteos_totales = np.sum(fa, axis=0) # Sumar la frecuencia absoluta de todos los números en todas las corridas
 
@@ -153,47 +174,59 @@ plt.xlabel("Valores de la Ruleta")
 plt.ylabel("Cantidad de veces que salió")
 plt.show()
 
-# Grafico 2: Gráfico de bastones - Frecuencia relativa del numero elegido por corrida
+# Grafico 2: Grafico Scatter (Dispersión) - Frecuencia relativa del numero elegido por corrida
 x_corridas = range(1, corridas + 1) # Eje x con el número de corridas (1, 2, ..., corridas)
 fr_corridas = [corrida[numero_elegido][-1] for corrida in fr_a]
 
-plt.stem(x_corridas, fr_corridas, label=f'Frecuencia Relativa del número {numero_elegido}')
-plt.axhline(y=fr_e, color='r', linestyle='--', label='Frecuencia Relativa Esperada')
-plt.title("Gráfico de bastones - Número de Corridas sobre Frecuencia Relativa")
+plt.scatter(x_corridas, fr_corridas, alpha=0.5, s=10, label=f'Frecuencia Relativa del número {numero_elegido}')
+plt.axhline(y=fr_e, color='r', linestyle='--', linewidth=2, label='Frecuencia Relativa Esperada')
+graficar_regla_empirica(fr_corridas)
+plt.title("Gráfico de Dispersión - Número de Corridas sobre Frecuencia Relativa")
 plt.xlabel("Número de corridas")
 plt.ylabel("Frecuencia Relativa")
-plt.legend()
+# plt.legend() # Comentado para que no tape todo el gráfico con tantas líneas, o puedes ponerlo
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
 plt.show()
 
-# Grafico 3: Promedio por corrida
+# Grafico 3: Grafico Scatter (Dispersión) - Promedio por corrida
 vp_corridas = [corrida[-1] for corrida in vp_a]
-plt.stem(x_corridas, vp_corridas, label='Valor Promedio')
-plt.axhline(y=vp_e, color='r', linestyle='--', label='Valor Promedio Esperado')
-plt.title("Gráfico de bastones - Número de Corridas sobre Valor Promedio")
+plt.scatter(x_corridas, vp_corridas, alpha=0.5, s=10, label='Valor Promedio')
+plt.axhline(y=vp_e, color='r', linestyle='--', linewidth=2, label='Valor Promedio Esperado')
+graficar_regla_empirica(vp_corridas)
+plt.title("Gráfico de Dispersión - Número de Corridas sobre Valor Promedio")
 plt.xlabel("Número de corridas")
 plt.ylabel("Valor Promedio")
-plt.legend()
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
 plt.show()
 
-# Grafico 4: Desvio estandar por corrida
+# Grafico 4: Grafico Scatter (Dispersión) - Desvio estandar por corrida
 vd_corridas = [corrida[-1] for corrida in vd_a]
-plt.stem(x_corridas, vd_corridas, label='Valor Desvio')
-plt.axhline(y=desv_e, color='r', linestyle='--', label='Valor Desvio Esperado')
-plt.title("Gráfico de bastones - Número de Corridas sobre Valor Desvio")
+plt.scatter(x_corridas, vd_corridas, alpha=0.5, s=10, label='Valor Desvio')
+plt.axhline(y=desv_e, color='r', linestyle='--', linewidth=2, label='Valor Desvio Esperado')
+graficar_regla_empirica(vd_corridas)
+plt.title("Gráfico de Dispersión - Número de Corridas sobre Valor Desvio")
 plt.xlabel("Número de corridas")
 plt.ylabel("Valor Desvio")
-plt.legend()
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
 plt.show()
 
-# Grafico 5: Varianza por corrida
+# Grafico 5: Grafico Scatter (Dispersión) - Varianza por corrida
 vv_corridas = [corrida[-1] for corrida in vv_a]
-plt.stem(x_corridas, vv_corridas, label='Valor Varianza')
-plt.axhline(y=vari_e, color='r', linestyle='--', label='Valor Varianza Esperado')
-plt.title("Gráfico de bastones - Número de Corridas sobre Valor Varianza")
+plt.scatter(x_corridas, vv_corridas, alpha=0.5, s=10, label='Valor Varianza')
+plt.axhline(y=vari_e, color='r', linestyle='--', linewidth=2, label='Valor Varianza Esperado')
+graficar_regla_empirica(vv_corridas)
+plt.title("Gráfico de Dispersión - Número de Corridas sobre Valor Varianza")
 plt.xlabel("Número de corridas")
 plt.ylabel("Valor Varianza")
-plt.legend()
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
 plt.show()
+
+
+
 
 
 
