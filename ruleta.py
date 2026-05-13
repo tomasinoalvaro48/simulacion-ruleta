@@ -21,7 +21,7 @@ corridas = args.t
 numero_elegido = args.e
 '''
 tiradas = 1000
-corridas = 3000
+corridas = 30
 numero_elegido = 0
 
 # Caracteristicas de la ruleta
@@ -93,7 +93,7 @@ for corrida in range(corridas):
 
 # --------- Graficos de comparación en UNA corrida ---------
 # Grafico 1: Gráfico de bastones - Frecuencia Absoluta
-plt.stem(range(1, cant_numeros_ruleta+1), fa[0], label='Frecuencia Absoluta')
+plt.stem(range(cant_numeros_ruleta), fa[0], label='Frecuencia Absoluta')
 plt.title("Gráfico de Bastones - Frecuencia Absoluta de cada número en una corrida")
 plt.xlabel("Valores de la Ruleta")
 plt.ylabel("Cantidad de veces que salió")
