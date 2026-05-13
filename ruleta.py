@@ -20,7 +20,7 @@ corridas = args.t
 numero_elegido = args.e
 '''
 cant_tiradas = 1000
-corridas = 30
+corridas = 1
 numero_elegido = 0
 
 # Caracteristicas de la ruleta
@@ -35,13 +35,19 @@ varie = float(np.var(valores_ruleta)) # Varianza esperada
 
 # ----------- Simulación -----------
 # Definicion de variables para almacenar resultados
-fa = [] # Frecuencia absoluta 
-fr = [] # Frecuencia relativa 
+fa = [] # Frecuencia absoluta
+fr = [] # Frecuencia relativa
 vp = [] # Valor promedio de las tiradas por corrida
 desv = [] # Desvio de las tiradas por corrida
 vari = [] # Varianza de las tiradas por corrida
+
 cantidad_exitos = [] # Cantidad de veces que salió el número elegido por corrida
 valores_total = [] # Almacena los valores de todas las tiradas de todas las corridas para graficos agregados
+
+fr_c = [] # Frecuencia relativa en una corrida
+vp_c = [] # Valor promedio en una corrida
+vd_c = [] # Valor desvio en una corrida
+vv_c = [] # Valor varianza en una corrida
 
 # Inicia la simulacion
 print(f"Simulando {corridas} corridas de {cant_tiradas} tiradas. Apostando al {numero_elegido}...")
@@ -50,9 +56,35 @@ for i in range(corridas):
     valores = np.random.randint(0, cant_numeros, cant_tiradas)
     valores_total.append(valores)
     
+    if(i == 0):
+        cant_veces_elegido = 0 # Veces que salió el número elegido para calcular la frecuencia relativa acumulada
+        for i in range(cant_tiradas):
+            if(valores[i] == numero_elegido):
+                cant_veces_elegido += 1
+            fr_c.append(cant_veces_elegido / (i + 1))
+
+            #Valor promedio acumulado
+            vpa = 0
+            for j in range(i+1):
+                vpa += valores[j]
+            vp_c.append(float(vpa) / (i + 1))
+            
+            #Desvio acumulado
+            vda = 0
+            for j in range(i+1):
+                vda += ((valores[j] - vp_c[i])**2) # Suma de los cuadrados de las diferencias entre cada valor y el valor promedio acumulado
+            vda = (vda/(i + 1))**0.5 # Desviación estándar acumulada
+            vd_c.append(vda)
+
+            #Varianza
+            vva = 0
+            for j in range(i+1):
+                vva += ((valores[j] - vp_c[i])**2) # Suma de los cuadrados de las diferencias entre cada valor y el valor promedio acumulado
+            vva = vva/(i + 1) # Varianza acumulada
+            vv_c.append(vva)
+
     fac = [] # Frecuencia absoluta por corrida
     frc = [] # Frecuencia relativa por corrida
-
     for j in range(cant_numeros):
         contador_resultados = 0
         for v in range(cant_tiradas):
@@ -75,14 +107,50 @@ for i in range(corridas):
     print(f"Corrida N°{i}:\n Promedio: {promedio_corrida} - Varianza: {varianza_corrida} - Desvío: {desvio_corrida}\n")   
 
 
+promedio_total = float(np.mean(vp)) # Valor promedio total de todas las corridas
+
+
+
 # --------- Graficos de comparación por tirada ---------
 # estos tres son para ver cómo se van acercando al valor esperado a medida que aumentan las tiradas
 
-# Grafico 1: Historigrama - Promedio --> eje x: las 1000 tiradas, eje y: valor del promedio que se va calculando en cada tirada
-# Grafico 2: Historigrama - Varianza --> eje x: las 1000 tiradas, eje y: valor de la varianza que se va calculando en cada tirada
-# Grafico 3: Frecuencia relativa del numero elegido por tirada --> eje x: las 1000 tiradas, eje y: valor de la frecuencia relativa del numero elegido que se va calculando en cada tirada
+# Grafico 1: Frecuencia relativa del numero elegido por tirada --> eje x: las 1000 tiradas, eje y: valor de la frecuencia relativa 
+# del numero elegido que va cambiando en cada tirada (al aumentar el número de la muestra, la frecuencia relativa del número elegido 
+# debería acercarse a la frecuencia relativa esperada)
+plt.plot(range(1, cant_tiradas+1), fr_c, label=f'Frecuencia Relativa del número {numero_elegido}')
+plt.axhline(y=fre, color='r', linestyle='--', label='Frecuencia Relativa Esperada') 
+plt.title("Número de Tiradas sobre Frecuencia Relativa") 
+plt.xlabel("Número de tiradas") 
+plt.ylabel("Frecuencia Relativa")
+plt.legend() 
+plt.show()
+'''
+# Grafico 1: Historigrama - Promedio --> eje x: las 1000 tiradas, eje y: valor del promedio que se va acumulando en cada tirada
+plt.plot(range(1, cant_tiradas+1), vp_c, label=f'Valor Promedio del número {numero_elegido}') # Dibuja el valor promedio del número elegido
+plt.axhline(y=vpe, color='r', linestyle='--', label='Valor Promedio Esperado') # Dibuja una línea horizontal para el valor promedio esperado
+plt.title("Número de Tiradas sobre Valor Promedio") # Establece el título del gráfico
+plt.xlabel("Número de tiradas") # Establece el título del eje x 
+plt.ylabel("Valor Promedio") # Establece el título del eje y
+plt.legend() # Muestra la leyenda
+plt.show() # Muestra el gráfico
 
-# HACER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#Grafico 3: Dibuja el gráfico de valor desvio acumulado para el nro elegido a lo largo de las tiradas de una corrida
+plt.plot(range(1, cant_tiradas+1), vd_c, label=f'Valor Desvio del número {numero_elegido}') # Dibuja el valor desvio del número elegido
+plt.axhline(y=desve, color='r', linestyle='--', label='Valor Desvio Esperado') # Dibuja una línea horizontal para el valor desvio esperado
+plt.title("Número de Tiradas sobre Valor Desvio") # Establece el título del gráfico
+plt.xlabel("Número de tiradas") # Establece el título del eje x 
+plt.ylabel("Valor Desvio") # Establece el título del eje y
+plt.legend() # Muestra la leyenda
+plt.show() # Muestra el gráfico
+
+# Grafico 4: Historigrama - Varianza --> eje x: las 1000 tiradas, eje y: valor de la varianza que se va calculando en cada tirada
+plt.plot(range(1, cant_tiradas+1), vv_c, label=f'Valor Varianza del número {numero_elegido}') # Dibuja el valor varianza del número elegido
+plt.axhline(y=varie, color='r', linestyle='--', label='Valor Varianza Esperado') # Dibuja una línea horizontal para el valor varianza esperado
+plt.title("Número de Tiradas sobre Valor Varianza") # Establece el título del gráfico
+plt.xlabel("Número de tiradas") # Establece el título del eje x 
+plt.ylabel("Valor Varianza") # Establece el título del eje y
+plt.legend() # Muestra la leyenda
+plt.show() # Muestra el gráfico
 
 # --------- Graficos de comparación por corrida ---------
 # estos son para ver que los valores de cada corrida efectivamente son cercanos a los valores esperados
@@ -138,66 +206,11 @@ plt.ylabel("Valor Varianza")
 plt.legend()
 plt.show()
 
+
+'''
+
+
 # estos gráficos se usan para ver cómo los valores acumulados de cada corrida son más precisos y tienden 
 # a una distribución normal a medida que aumentan las corridas
 
 # HACER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-'''
-
-    exitos = np.count_nonzero(valores == numero_elegido)
-
-
-
-    fa.append(exitos)
-    # 2. Frecuencia relativa: exitos / tiradas
-    fr.append(exitos / cant_tiradas)
-    # 3. Valor promedio: media de los resultados en la corrida
-    vp.append(np.mean(valores))
-    # 4. Desvio de los resultados
-    desv.append(statistics.pstdev(valores))
-    # 5. Varianza de los resultados
-    vari.append(statistics.pvariance(valores))
-print("\n--- ESTADISTICOS FINALES ---")
-print(f"Probabilidad teorica (esperada): {fre:.4f}")
-print(f"Frecuencia relativa media (simulada): {np.mean(fr):.4f}")
-print(f"Valor promedio teorico: {vpe:.2f}")
-print(f"Valor promedio simulado: {np.mean(vp):.2f}")
-
-# Preparar datos agregados para graficos
-if valores_total:
-    valores_total = np.concatenate(valores_total)
-else:
-    valores_total = np.array([])
-
-# Dibuja el gráfico de bastones (frecuencia absoluta por numero)
-conteos = np.bincount(valores_total, minlength=37) if valores_total.size > 0 else np.zeros(37, dtype=int)
-plt.bar(range(37), conteos, color='blue')
-plt.title("Gráfico de Bastones")
-plt.xlabel("Valores de la Ruleta")
-plt.ylabel("Cantidad de veces que salió")
-plt.show()
-
-
-# Dibuja el gráfico de promedio de tiradas
-plt.plot(vp)
-plt.title("Valor promedio de las tiradas") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x
-plt.ylabel("Valor promedio de las tiradas") # Establece el título del eje y
-plt.show() # Muestra el gráfico
-
-# Dibuja el gráfico del valor de desvio
-plt.plot(desv)
-plt.title("Desvio de las tiradas") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x
-plt.ylabel("Valor del desvio") # Establece el título del eje y
-plt.show() # Muestra el gráfico
-
-# Dibuja el gráfico del valor de la varianza
-plt.plot(vari)
-plt.title("Varianza de las tiradas") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x
-plt.ylabel("Valor de la varianza") # Establece el título del eje y
-plt.show() # Muestra el gráfico
-
-'''
