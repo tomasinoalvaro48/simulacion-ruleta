@@ -4,25 +4,18 @@ import argparse
 
 
 # --------------- Manejo de argumentos de linea de comandos al ejecutar el script ---------------
-'''
-# python programa.py -c XXX -n YYY -e ZZ
+# python ruleta.py -n XXX -c YYY -e ZZ
 parser = argparse.ArgumentParser(description='Simulación de Ruleta.')
-parser.add_argument('-c', '--corridas', type=int, required=True, help='Cantidad de corridas/simulaciones')
 parser.add_argument('-n', '--muestras', type=int, required=True, help='Cantidad de muestras por corrida')
+parser.add_argument('-c', '--corridas', type=int, required=True, help='Cantidad de corridas/simulaciones')
 parser.add_argument('-e', '--elegido', type=int, required=True, help='Número apostado/elegido')
-'''
 
 # ----------- Definicion de constantes y variables -----------
 # Caracteristicas de la simulacion
-'''
 args = parser.parse_args()
-tiradas = args.c
-corridas = args.t
-numero_elegido = args.e
-'''
-tiradas = 150
-corridas = 1000
-numero_elegido = 0
+tiradas = args.muestras
+corridas = args.corridas
+numero_elegido = args.elegido
 
 # Caracteristicas de la ruleta
 cant_numeros_ruleta = 37 # Números del 0 al 36
