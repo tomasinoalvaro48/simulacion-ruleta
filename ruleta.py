@@ -30,6 +30,7 @@ valores_ruleta = np.arange(cant_numeros_ruleta) # Array con los valores 0 a 36 d
 
 # --------- Datos Esperados ---------
 # Distribucion Uniforme Discreta
+fa_e = tiradas / cant_numeros_ruleta # Frecuencia absoluta esperada
 fr_e = 1.0 / cant_numeros_ruleta # Frecuencia relativa esperada
 vp_e = valores_ruleta.sum() / cant_numeros_ruleta  # Valor promedio esperado
 desv_e = float(np.std(valores_ruleta)) # Desvio estandar esperado
@@ -94,30 +95,32 @@ for corrida in range(corridas):
 # --------- Graficos de comparación en UNA corrida ---------
 # Grafico 1: Gráfico de bastones - Frecuencia Absoluta
 plt.stem(range(cant_numeros_ruleta), fa[0], label='Frecuencia Absoluta')
+plt.axhline(y=fa_e, color='r', linestyle='--', label='Frecuencia Absoluta Esperada')
 plt.title("Gráfico de Bastones - Frecuencia Absoluta de cada número en una corrida")
 plt.xlabel("Valores de la Ruleta")
 plt.ylabel("Cantidad de veces que salió")
+plt.legend() 
 plt.show()
 
 # Grafico 2
 # Dibuja el gráfico de valor promedio acumulado para el nro elegido a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), vp_a[0], label='Valor Promedio de una corrida')
-plt.axhline(y=vp_e, color='r', linestyle='--', label='Valor Promedio Esperado') # Dibuja una línea horizontal para el valor promedio esperado
-plt.title("Número de Tiradas sobre Valor Promedio en una corrida") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x 
-plt.ylabel("Valor Promedio") # Establece el título del eje y
-plt.legend() # Muestra la leyenda
-plt.show() # Muestra el gráfico
+plt.axhline(y=vp_e, color='r', linestyle='--', label='Valor Promedio Esperado') 
+plt.title("Número de Tiradas sobre Valor Promedio en una corrida") 
+plt.xlabel("Número de tiradas") 
+plt.ylabel("Valor Promedio") 
+plt.legend() 
+plt.show()
 
 # Grafico 3
 # Dibuja el gráfico de valor desvio acumulado para el nro elegido a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), vd_a[0], label=f'Valor Desvio del número {numero_elegido}')
-plt.axhline(y=desv_e, color='r', linestyle='--', label='Valor Desvio Esperado') # Dibuja una línea horizontal para el valor desvio esperado
-plt.title("Número de Tiradas sobre Valor Desvio en una corrida") # Establece el título del gráfico
-plt.xlabel("Número de tiradas") # Establece el título del eje x 
-plt.ylabel("Valor Desvio") # Establece el título del eje y
-plt.legend() # Muestra la leyenda
-plt.show() # Muestra el gráfico
+plt.axhline(y=desv_e, color='r', linestyle='--', label='Valor Desvio Esperado')
+plt.title("Número de Tiradas sobre Valor Desvio en una corrida")
+plt.xlabel("Número de tiradas")
+plt.ylabel("Valor Desvio") 
+plt.legend()
+plt.show()
 
 # Grafico 4
 # Dibuja el gráfico de valor varianza acumulado para el nro elegido a lo largo de las tiradas de una corrida
