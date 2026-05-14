@@ -20,8 +20,8 @@ tiradas = args.c
 corridas = args.t
 numero_elegido = args.e
 '''
-tiradas = 1000
-corridas = 30
+tiradas = 150
+corridas = 1000
 numero_elegido = 0
 
 # Caracteristicas de la ruleta
@@ -89,7 +89,7 @@ for corrida in range(corridas):
 
 
 
-#-----------------------------------------------------
+#----------------------------------------------------
 #---------------- GRAFICOS 1 CORRIDA ----------------
 
 # --------- Graficos de comparación en UNA corrida ---------
@@ -106,7 +106,7 @@ plt.show()
 # Dibuja el gráfico de valor promedio acumulado para el nro elegido a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), vp_a[0], label='Valor Promedio de una corrida')
 plt.axhline(y=vp_e, color='r', linestyle='--', label='Valor Promedio Esperado') 
-plt.title("Número de Tiradas sobre Valor Promedio en una corrida") 
+plt.title("Número de Tiradas sobre Valor Promedio acumulado en una corrida") 
 plt.xlabel("Número de tiradas") 
 plt.ylabel("Valor Promedio") 
 plt.legend() 
@@ -116,7 +116,7 @@ plt.show()
 # Dibuja el gráfico de valor desvio acumulado para el nro elegido a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), vd_a[0], label=f'Valor Desvio del número {numero_elegido}')
 plt.axhline(y=desv_e, color='r', linestyle='--', label='Valor Desvio Esperado')
-plt.title("Número de Tiradas sobre Valor Desvio en una corrida")
+plt.title("Número de Tiradas sobre Valor Desvio acumulado en una corrida")
 plt.xlabel("Número de tiradas")
 plt.ylabel("Valor Desvio") 
 plt.legend()
@@ -126,32 +126,24 @@ plt.show()
 # Dibuja el gráfico de valor varianza acumulado para el nro elegido a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), vv_a[0], label=f'Valor Varianza del número {numero_elegido}')
 plt.axhline(y=vari_e, color='r', linestyle='--', label='Valor Varianza Esperado') 
-plt.title("Número de Tiradas sobre Valor Varianza en una corrida")
+plt.title("Número de Tiradas sobre Valor Varianza acumulada en una corrida")
 plt.xlabel("Número de tiradas")
 plt.ylabel("Valor Varianza")
 plt.legend()
 plt.show()
+
+
 
 # --------- Graficos de comparación del NUMERO ELEGIDO por tirada de 1 corrida ---------
 # Grafico 1
 # Dibuja el gráfico de frecuencia relativa para el NUMERO ELEGIDO a lo largo de las tiradas de una corrida
 plt.plot(range(1, tiradas+1), fr_a[0][numero_elegido], label=f'Frecuencia Relativa del número {numero_elegido}')
 plt.axhline(y=fr_e, color='r', linestyle='--', label='Frecuencia Relativa Esperada')
-plt.title(f"Número de Tiradas sobre Frecuencia Relativa del {numero_elegido}  para una corrida")
+plt.title(f"Número de Tiradas sobre Frecuencia Relativa acumulada del {numero_elegido}  para una corrida")
 plt.xlabel("Número de tiradas") 
 plt.ylabel("Frecuencia Relativa")
 plt.legend()
 plt.show()
-
-
-# Historgramas 
-
-#Grafico 1
-
-
-
-
-
 
 
 
@@ -170,7 +162,6 @@ def graficar_regla_empirica(datos):
 
 # Grafico 1: Gráfico de bastones - Frecuencia Absoluta
 conteos_totales = np.sum(fa, axis=0) # Sumar la frecuencia absoluta de todos los números en todas las corridas
-
 plt.stem(range(cant_numeros_ruleta), conteos_totales)
 plt.title("Gráfico de Bastones - Frecuencia Absoluta de cada número en todas las corridas")
 plt.xlabel("Valores de la Ruleta")
@@ -180,14 +171,12 @@ plt.show()
 # Grafico 2: Grafico Scatter (Dispersión) - Frecuencia relativa del numero elegido por corrida
 x_corridas = range(1, corridas + 1) # Eje x con el número de corridas (1, 2, ..., corridas)
 fr_corridas = [corrida[numero_elegido][-1] for corrida in fr_a]
-
 plt.scatter(x_corridas, fr_corridas, alpha=0.5, s=10, label=f'Frecuencia Relativa del número {numero_elegido}')
 plt.axhline(y=fr_e, color='r', linestyle='--', linewidth=2, label='Frecuencia Relativa Esperada')
 graficar_regla_empirica(fr_corridas)
 plt.title("Gráfico de Dispersión - Número de Corridas sobre Frecuencia Relativa")
 plt.xlabel("Número de corridas")
 plt.ylabel("Frecuencia Relativa")
-# plt.legend() # Comentado para que no tape todo el gráfico con tantas líneas, o puedes ponerlo
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.show()
@@ -248,7 +237,7 @@ plt.show()
 
 
 
-#-----------------------------------------------------
+#-------------------------------------------------------------
 #---------------- GRAFICOS MAS DE UNA CORRIDA ----------------
 
 # ---------- Graficos de tendencia de la distribución de los valores (TCL) a lo largo de las corridas ----------
