@@ -31,6 +31,7 @@ vari_e = float(np.var(valores_ruleta)) # Varianza esperada
 
 # ----------- Inicio de la simulación -----------
 print(f"Simulando {corridas} corridas de {tiradas} tiradas. Apostando al {numero_elegido}...")
+print("")
 
 fa = [] # Frecuencia absoluta de cada numero por corrida. fa[i][j] = corrida i, numero j
 fr_a = [] # Frecuencia relativa de cada numero acumulada por corrida. fr_a[i][j][k] = corrida i, numero j, tirada k
@@ -280,4 +281,10 @@ plt.grid(axis='y', alpha=0.3)
 plt.show()
 
 
-
+print("")
+varianza_obtenida = float(np.mean([corrida[-1] for corrida in vv_a]))
+desvio_obtenido = float(np.mean([corrida[-1] for corrida in vd_a]))
+print(f"Frecuencia relativa obtenida: {frecuencia_final_promedio:.4f}")
+print(f"Promedio obtenido: {promedio_ultima_tirada:.4f}")
+print(f"Varianza obtenida: {varianza_obtenida:.4f}")
+print(f"Desvío estándar obtenido: {desvio_obtenido:.4f}")
