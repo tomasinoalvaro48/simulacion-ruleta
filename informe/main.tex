@@ -122,7 +122,7 @@ hablemos de ruleta, nos estaremos refiriendo a este tipo.
 
 \paragraph{Importancia de la simulación}
 La simulación analizada no es simplemente un programa de generación de números al 
-azar: es una implementación computacional de los principios fundamentales de la estadística descriptiva e inferencial. Cada 
+azar: es una implementación computacional de los principios fundamentales de la estadística descriptiva e inferencial \cite{introducción_probabilidad}. Cada 
 variable del código tiene un correlato teórico preciso en la teoría de la probabilidad.
 
 La distribución uniforme discreta sobre $\{0,1,2,\dots,36\}$ determina todos los valores teóricos del sistema. 
@@ -151,7 +151,7 @@ comandos profesionales para capturar argumentos del usuario.
 \textit{numpy} introduce estructuras de datos de alto rendimiento, como los \textit{arrays} multidimensionales, que 
 permiten realizar operaciones matemáticas complejas de manera mucho más eficiente que las listas estándar de \textit{Python}. 
 Para dar sentido a estos datos, \textit{matplotlib.pyplot} se utiliza para generar gráficos, diagramas de dispersión, 
-histogramas o series temporales, permitiendo una interpretación visual de la información procesada.
+histogramas o series temporales, permitiendo una interpretación visual de la información procesada \cite{python_para_impacientes_graficos,probabilidad_estadistica_python}.
 
 Para la ejecución del programa se deberá ejecutar el siguiente comando: 
 \begin{center}
@@ -208,7 +208,7 @@ se calculan son:
 
 \subsubsection{Frecuencia absoluta}
 Es una medida estadística que indica el número de veces que un valor específico, dato o evento se repite dentro de un 
-conjunto total de datos.
+conjunto total de datos \cite{frecuencia_absoluta_economipedia}.
 
 \begin{center}
 $f_i =$ número de veces que aparece el valor $x_i$
@@ -231,7 +231,7 @@ es exactamente 1. A medida que $n \to \infty$ se espera que $f_r(k) \to P(X = k)
 \subsubsection{Medida de Tendencia Central}
 
 \paragraph{Valor promedio (media)}
-Es una medida de tendencia central que representa el valor ``típico'' de un conjunto de datos. Se calcula sumando todos 
+Es una medida de tendencia central que representa el valor ``típico'' de un conjunto de datos \cite{promedio_economipedia}. Se calcula sumando todos 
 los valores observados y dividiendo el resultado entre el número total de datos.
 
 $$\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{N}$$
@@ -241,12 +241,12 @@ Las medidas de dispersión cuantifican cuánto se alejan los valores individuale
 variabilidad o heterogeneidad de los datos. El programa calcula dos de ellas: la varianza y el desvío estándar.
 
 \paragraph{Varianza}
-Es una medida de dispersión estadística que indica qué tan alejados están los datos respecto al valor promedio.
+Es una medida de dispersión estadística que indica qué tan alejados están los datos respecto al valor promedio \cite{varianza_economipedia}.
 
 $$\sigma^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n}$$
 
 \paragraph{Desvío estándar}
-Es la raíz cuadrada de la varianza, indicando qué tan alejados están los valores del promedio en las mismas unidades.
+Es la raíz cuadrada de la varianza, indicando qué tan alejados están los valores del promedio en las mismas unidades \cite{desviacion_estandar_questionpro}.
 
 $$\sigma = \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n}}$$
 
@@ -276,6 +276,9 @@ tamaño de muestra ($n > 30$).
 
 Veremos cómo a medida que se aumenta el tamaño de la muestra, las gráficas formadas con los valores obtenidos de la 
 simulación tienden a distribuirse de manera Normal.
+
+\subsection{Configuración y justificación de parámetros}
+Para los parámetros, elegimos probar con un tamaño de muestra de $n=150$ tiradas por corrida porque es un valor mayor a 30, que es un requisito para que actúe el Teorema Central del Límite y se observe la tendencia a la normalidad. Por otro lado, probamos con $c=1000$ corridas, que permite observar una distribución de promedios lo suficientemente suave para validar la normalidad de los datos y asegurar que los estadísticos obtenidos sean representativos del comportamiento teórico esperado.
 
 \section{Resultados}
 \label{sec:resultados}
