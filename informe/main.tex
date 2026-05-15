@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 \usepackage{hyperref}       % hyperlinks
+\usepackage{cleveref}       % clever references (\cref)
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
@@ -13,6 +14,7 @@
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}
 \usepackage{graphicx}
+\usepackage{float}
 \graphicspath{ {./images/} }
 
 
@@ -107,7 +109,7 @@ La ruleta europea está compuesta por 37 números: del 1 al 36 y el cero. En cam
 la ruleta americana de \textit{doble cero} (compuesta por 38 números: los números del 1 al 36, el cero y el doble cero) y la 
 de \textit{un cero} (compuesta por 37 números: del 1 al 36 y el cero, al igual que la europea).
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{ruleta-americana-vs-europea.jpg}
   \caption{Diferencias entre la ruleta americana y la ruleta europea \cite{tipos_de_ruleta_casino}.}
@@ -188,7 +190,7 @@ $$X \sim U\{0, 1, \ldots, 36\}$$
 Función de Probabilidad: 
 $$P(X = x_i) = \frac{1}{n}$$
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{distribucion-uniforme-discreta.jpg}
   \caption{Distribución uniforme discreta \cite{distribucion_uniforme_discreta}.}
@@ -298,103 +300,187 @@ los gráficos de TCL (histogramas).
 
 \subsubsection{Gráfico de frecuencia absoluta en todas las corridas}
 
-Este gráfico de bastones representa la cantidad de veces que aparece cada número de la ruleta durante todas las simulaciones 
-realizadas. En el eje x se muestran los valores posibles de la ruleta (del 0 al 36), mientras que en el eje y se indica la 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{f6-bastones-frecuencia-absoluta-de-cada-numero-todas-las-corridas.png}
+  \caption{Frecuencia absoluta de cada número en todas las corridas}
+  \label{fig:frecuencia-absoluta-de-cada-numero-todas-las-corridas}
+\end{figure}
+
+La \cref{fig:frecuencia-absoluta-de-cada-numero-todas-las-corridas} es un gráfico de bastones que representa la cantidad de veces que aparece cada número de la ruleta durante todas las simulaciones
+realizadas.En el eje x se muestran los valores posibles de la ruleta (del 0 al 36), mientras que en el eje y se indica la 
 frecuencia absoluta correspondiente a cada número.
 
 El gráfico muestra cómo se distribuyen los resultados obtenidos en la simulación, para ver si el comportamiento observado se 
 aproxima al esperado. Debido a que todos los números tienen la misma probabilidad de ocurrencia, se espera que los bastones 
 tengan alturas más o menos parecidas, aunque pueden presentarse diferencias debido al azar y la cantidad limitada de tiradas.
 
-A medida que aumenta la cantidad de corridas y tiradas, las frecuencias tienden a estabilizarse y acercarse a una distribución 
+A medida que aumenta la cantidad de corridas y tiradas, las frecuencias tienden a estabilizarse y acercarse a una distribución
 uniforme.
 
 \subsubsection{Gráfico de frecuencia absoluta en una corrida}
 
-Este gráfico de bastones representa la frecuencia con la que aparece cada número de la ruleta en una única corrida específica 
-del experimento. En el eje x se muestran los valores posibles de la ruleta (del 0 al 36), y en el eje y la cantidad de veces 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{f1-bastones-frecuencia-absoluta-de-cada-numero.png}
+  \caption{Frecuencia absoluta de cada número en una corrida}
+  \label{fig:frecuencia-absoluta-de-cada-numero-en-una-corridas}
+\end{figure}
+
+La \cref{fig:frecuencia-absoluta-de-cada-numero-en-una-corridas} es un gráfico de bastones que representa la frecuencia con la que aparece cada número de la ruleta en una única corrida específica
+del experimento.En el eje x se muestran los valores posibles de la ruleta (del 0 al 36), y en el eje y la cantidad de veces 
 que sale cada uno.
 
-A diferencia del gráfico de frecuencia absoluta total, este permite ver la gran variabilidad que hay en una sola realización de 
+A diferencia del gráfico de frecuencia absoluta total, este permite ver la gran variabilidad que hay en una sola realización de
 la simulación, debido a la aleatoriedad.
 
 \subsubsection{Gráficos de frecuencia relativa}
 
-Estos gráficos muestran la evolución de la frecuencia relativa del número elegido durante las distintas tiradas/corridas de la 
-simulación. La frecuencia relativa se calcula como la cantidad de veces que apareció el número elegido dividido el total de 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f5-frecuencia-relativa-del-numero-elegido-de-una-corrida.png}
+  \caption{Frecuencia relativa del número elegido en una corrida}
+  \label{fig:frecuencia-relativa-del-numero-elegido-en-una-corrida}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f7-dispercion-frecuencia-relativa-del-numero-elegido-todas-las-corridas.png}
+  \caption{Frecuencia relativa del número elegido en todas las corridas}
+  \label{fig:frecuencia-relativa-del-numero-elegido-en-todas-las-corridas}
+\end{figure}
+
+Las \cref{fig:frecuencia-relativa-del-numero-elegido-en-una-corrida,fig:frecuencia-relativa-del-numero-elegido-en-todas-las-corridas} muestran la evolución de la frecuencia relativa del número elegido durante las distintas tiradas/corridas de la
+simulación.La frecuencia relativa se calcula como la cantidad de veces que apareció el número elegido dividido el total de 
 tiradas/corridas realizadas.
 
-En el primer gráfico, en el eje x se representa el número de tiradas, mientras que en el eje y se muestra el valor de la 
-frecuencia relativa obtenida. El comportamiento esperado es que, a medida que aumenta la cantidad de tiradas, la frecuencia 
+En la \cref{fig:frecuencia-relativa-del-numero-elegido-en-una-corrida}, en el eje x se representa el número de tiradas, mientras que en el eje y se muestra el valor de la
+frecuencia relativa obtenida. El comportamiento esperado es que, a medida que aumenta la cantidad de tiradas, la frecuencia
 relativa tiende a aproximarse a la probabilidad de obtener un número específico en la ruleta ($P(X) = 1/37 \approx 0,027$).
 
-En las primeras tiradas, se pueden observar muchas fluctuaciones debido a la aleatoriedad, pero mientras el tamaño de la muestra 
+En las primeras tiradas, se pueden observar muchas fluctuaciones debido a la aleatoriedad, pero mientras el tamaño de la muestra
 va aumentando, los valores se empiezan a estabilizar alrededor del valor esperado.
 
-En el segundo gráfico, se usa un gráfico de dispersión, donde el eje x representa cada corrida independiente. Esto permite 
+En la \cref{fig:frecuencia-relativa-del-numero-elegido-en-todas-las-corridas}, se usa un gráfico de dispersión, donde el eje x representa cada corrida independiente.Esto permite 
 observar cómo el éxito de la apuesta cambia en cada experimento y cómo cada resultado final se posiciona respecto a la 
 frecuencia relativa esperada.
 
 \subsubsection{Gráficos del promedio}
 
-Estos gráficos representan el valor promedio de los números obtenidos en cada tirada/corrida de la simulación. El promedio se 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f2-valor-promedio-acumulado-de-una-corrida.png}
+  \caption{Valor promedio acumulado en una corrida}
+  \label{fig:valor-promedio-acumulado-en-una-corrida}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f8-dispercion-valor-promedio-todas-las-corridas.png}
+  \caption{Valor promedio en todas las corridas}
+  \label{fig:valor-promedio-en-todas-las-corridas}
+\end{figure}
+
+Las \cref{fig:valor-promedio-acumulado-en-una-corrida,fig:valor-promedio-en-todas-las-corridas} representan el valor promedio de los números obtenidos en cada tirada/corrida de la simulación. El promedio se 
 calcula sumando todos los resultados obtenidos y dividiendo esa suma por la cantidad total de tiradas/corridas.
 
-En el primer gráfico, en el eje x se muestra el número de tiradas realizadas, y el eje y indica el valor promedio calculado. 
+En la \cref{fig:valor-promedio-acumulado-en-una-corrida}, en el eje x se muestra el número de tiradas realizadas, y el eje y indica el valor promedio calculado.
 Teóricamente, el promedio esperado de una ruleta con números entre 0 y 36 es:
 $$\mu = \frac{0+36}{2} = 18$$
 
-En las primeras etapas de la simulación el promedio puede variar bastante debido a la poca cantidad de datos. Pero mientras la 
+En las primeras etapas de la simulación el promedio puede variar bastante debido a la poca cantidad de datos. Pero mientras la
 cantidad de tiradas va aumentando, el promedio tiende a estabilizarse alrededor del valor esperado.
 
-En el segundo gráfico, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra el 
-promedio final obtenido en cada realización. La dispersión de estos bastones alrededor de la línea del valor promedio esperado 
+En la \cref{fig:valor-promedio-en-todas-las-corridas}, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra el
+promedio final obtenido en cada realización.La dispersión de estos bastones alrededor de la línea del valor promedio esperado 
 (18) permite analizar la precisión de cada corrida individual.
 
 \subsubsection{Gráficos del desvío estándar}
 
-Estos gráficos muestran el comportamiento del desvío estándar de los resultados obtenidos en las distintas tiradas/corridas. 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f3-valor-desvio-acumulado-de-una-corrida.png}
+  \caption{Valor desvío acumulado en una corrida}
+  \label{fig:valor-desvio-acumulado-en-una-corrida}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f9-dispercion-valor-desvio-todas-las-corridas.png}
+  \caption{Valor desvío en todas las corridas}
+  \label{fig:valor-desvio-en-todas-las-corridas}
+\end{figure}
+
+Las \cref{fig:valor-desvio-acumulado-en-una-corrida,fig:valor-desvio-en-todas-las-corridas} muestran el comportamiento del desvío estándar de los resultados obtenidos en las distintas tiradas/corridas. 
 El desvío estándar indica cuánto se dispersan los valores respecto al promedio.
 
-En el primer gráfico, en el eje x se representan las tiradas realizadas, y en el eje y se muestra el valor del desvío estándar 
-calculado para cada corrida. Un valor alto indica una mayor dispersión de los resultados, mientras que un valor menor indica que 
+En la \cref{fig:valor-desvio-acumulado-en-una-corrida}, en el eje x se representan las tiradas realizadas, y en el eje y se muestra el valor del desvío estándar
+calculado para cada corrida. Un valor alto indica una mayor dispersión de los resultados, mientras que un valor menor indica que
 los números obtenidos están más concentrados alrededor de la media.
 
 A medida que la cantidad de tiradas aumenta, el desvío estándar tiende a estabilizarse cerca del valor desvío esperado.
 
-En el segundo gráfico, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra el 
-desvío estándar final en cada una. Este gráfico permite comparar la consistencia de la dispersión de datos entre distintos 
+En la \cref{fig:valor-desvio-en-todas-las-corridas}, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra el
+desvío estándar final en cada una.Este gráfico permite comparar la consistencia de la dispersión de datos entre distintos 
 experimentos independientes.
 
 \subsubsection{Gráficos de la varianza}
 
-Estos gráficos representan la evolución de la varianza de los resultados obtenidos en la simulación. La varianza cuantifica el 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f4-valor-varianza-acumulado-de-una-corrida.png}
+  \caption{Valor varianza acumulado en una corrida}
+  \label{fig:valor-varianza-acumulado-en-una-corrida}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f10-dispercion-valor-varianza-todas-las-corridas.png}
+  \caption{Valor varianza en todas las corridas}
+  \label{fig:valor-varianza-en-todas-las-corridas}
+\end{figure}
+
+Las \cref{fig:valor-varianza-acumulado-en-una-corrida,fig:valor-varianza-en-todas-las-corridas} representan la evolución de la varianza de los resultados obtenidos en la simulación. La varianza cuantifica el 
 grado de dispersión de los datos respecto al promedio, calculando el promedio de las diferencias cuadráticas respecto de la media.
 
-En el primer gráfico, en el eje x se representan las tiradas realizadas, y en el eje y se muestra el valor de la varianza 
-calculada para cada corrida. En las primeras tiradas se pueden observar muchas variaciones debido a la baja cantidad de muestras 
+En la \cref{fig:valor-varianza-acumulado-en-una-corrida}, en el eje x se representan las tiradas realizadas, y en el eje y se muestra el valor de la varianza
+calculada para cada corrida. En las primeras tiradas se pueden observar muchas variaciones debido a la baja cantidad de muestras
 analizadas, pero cuando la cantidad de tiradas va aumentando, la varianza tiende a estabilizarse alrededor del valor esperado.
 
-En el segundo gráfico, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra la 
-varianza total calculada al finalizar cada una. Sirve para verificar que la variabilidad interna de cada experimento se mantiene 
+En la \cref{fig:valor-varianza-en-todas-las-corridas}, se usa un gráfico de dispersión donde el eje x representa la cantidad de corridas y el eje y muestra la
+varianza total calculada al finalizar cada una.Sirve para verificar que la variabilidad interna de cada experimento se mantiene 
 dentro de los parámetros esperados de una distribución uniforme.
 
 \subsubsection{Histograma de promedios finales}
 
-Este gráfico representa la distribución de frecuencia de los promedios calculados al terminar cada corrida independiente. En el 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f11-histograma-promedios-finales-de-cada-corrida.png}
+  \caption{Histograma de promedios finales de cada corrida}
+  \label{fig:histograma-de-promedios-finales-de-cada-corrida}
+\end{figure}
+
+La \cref{fig:histograma-de-promedios-finales-de-cada-corrida} representa la distribución de frecuencia de los promedios calculados al terminar cada corrida independiente. En el 
 eje x se muestran los valores de los promedios obtenidos y en el eje y la cantidad de corridas que alcanzaron ese valor promedio.
 
-Este histograma demuestra el Teorema Central del Límite (TCL), porque permite observar cómo los datos adoptan una forma de campana 
-de Gauss centrada cerca del valor promedio esperado (18), demostrando que la media de los resultados tiende a la normalidad al 
+La \cref{fig:histograma-de-promedios-finales-de-cada-corrida} demuestra el Teorema Central del Límite (TCL), porque permite observar cómo los datos adoptan una forma de campana
+de Gauss centrada cerca del valor promedio esperado (18), demostrando que la media de los resultados tiende a la normalidad al
 aumentar la cantidad de experimentos.
 
 \subsubsection{Histograma de frecuencias relativas finales}
 
-Este gráfico muestra la distribución de las frecuencias relativas finales obtenidas para el número elegido a lo largo de todas las 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{f12-histograma-frecuencia-relativa-final-del-numero-elegido-de-cada-corrida.png}
+  \caption{Histograma de frecuencias relativas finales de cada corrida}
+  \label{fig:histograma-de-frecuencias-relativas-finales-de-cada-corrida}
+\end{figure}
+
+La \cref{fig:histograma-de-frecuencias-relativas-finales-de-cada-corrida} muestra la distribución de las frecuencias relativas finales obtenidas para el número elegido a lo largo de todas las
 corridas de la simulación. En el eje x se representa el valor de la frecuencia relativa alcanzada y en el eje y la frecuencia o 
 cantidad de corridas que obtuvieron ese resultado.
 
-Al igual que el histograma de promedios, este gráfico valida el TCL, mostrando cómo los éxitos de la apuesta en varios experimentos 
+Al igual que la \cref{fig:histograma-de-promedios-finales-de-cada-corrida}, la \cref{fig:histograma-de-frecuencias-relativas-finales-de-cada-corrida} valida el TCL, mostrando cómo los éxitos de la apuesta en varios experimentos
 independientes tienden a agruparse de forma normal alrededor de la probabilidad teórica de $1/37 \approx 0,027$.
 
 \subsection{Comparación entre valores teóricos y simulados}
