@@ -15,7 +15,7 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{float}
-\graphicspath{ {./images/} }
+\graphicspath{{./images/}{./images/graficos/}}
 
 
 \title{TP 1.1 - SIMULACIÓN DE UNA RULETA}
@@ -193,7 +193,7 @@ $$P(X = x_i) = \frac{1}{n}$$
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{distribucion-uniforme-discreta.jpg}
-  \caption{Distribución uniforme discreta \cite{distribucion_uniforme_discreta}.}
+  \caption{Distribución uniforme discreta.}
   \label{fig:distribucion-uniforme-discreta}
 \end{figure}
 
@@ -211,7 +211,7 @@ Es una medida estadística que indica el número de veces que un valor específi
 conjunto total de datos.
 
 \begin{center}
-$f_i =$ \text{número de veces que aparece el valor } $x_i$
+$f_i =$ número de veces que aparece el valor $x_i$
 \end{center}
 
 La suma de todas las frecuencias absolutas tiene que ser igual al tamaño de la muestra:
@@ -260,8 +260,8 @@ Sus propiedades teóricas se definen como sigue:
     \textbf{Concepto} & \textbf{Variable en código} & \textbf{Valor teórico esperado} \\
     \midrule
     Valor Promedio (Media) & \verb+vpe+ & $E[X] = (0 + 36) / 2 = 18$ \\
-    Varianza & \verb+varie+ & $\text{Var}(X) = (37^2 - 1) / 12 \approx 114$ \\
-    Desvío Estándar & \verb+desve+ & $\sigma = \sqrt{\text{Var}(X)} \approx 10,68$ \\
+    Varianza & \verb+varie+ & $Var(X) = (37^2 - 1) / 12 \approx 114$ \\
+    Desvío Estándar & \verb+desve+ & $\sigma = \sqrt{Var(X)} \approx 10,68$ \\
     Probabilidad de cada valor & \verb+fre+ & $P(X = k) = 1/37 \approx 0,027$ \\
     \bottomrule
   \end{tabular}
